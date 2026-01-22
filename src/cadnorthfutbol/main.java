@@ -5,7 +5,10 @@
  */
 package cadnorthfutbol;
 
+import java.util.ArrayList;
 import pojosnorthfutbol.Comentario;
+import pojosnorthfutbol.Equipo;
+import pojosnorthfutbol.ExcepcionNF;
 
 /**
  *
@@ -14,6 +17,13 @@ import pojosnorthfutbol.Comentario;
 public class main {
     public static void main(String[] args) {
         
-        Comentario com = new Comentario();
+        try {
+            CADNorthFutbol cad = new CADNorthFutbol();
+            ArrayList<Equipo> equipos = cad.leerEquipos();
+            System.out.println(equipos);
+            
+        } catch (ExcepcionNF e) {
+            System.out.println(e);
+        }
     }
 }
