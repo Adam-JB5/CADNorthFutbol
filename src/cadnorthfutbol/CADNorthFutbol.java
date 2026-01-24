@@ -60,7 +60,7 @@ public class CADNorthFutbol {
     /**
      * Este método hace una consulta recogiendo datos de todos los equipos de
      * la base de datos
-     * @return
+     * @return Lista (ArrayList) de equipos leídos
      * @throws ExcepcionNF
      * @author Adam Janah
      * @version 1.0
@@ -105,8 +105,10 @@ public class CADNorthFutbol {
     }
     
     /**
-     * 
-     * @return
+     * Este método elimina un registro de la tabla Equipo según un identificador
+     * específico
+     * @return Cantidad de registros eliminados
+     * @param idEquipo Identificador del equipo a eliminar
      * @throws ExcepcionNF
      * @author Adam Janah
      * @version 1.0
@@ -128,7 +130,7 @@ public class CADNorthFutbol {
 
             switch (ex.getErrorCode()) {
                 case 2292:
-                    e.setMensajeErrorUsuario("No se puede eliminar ya que tiene asociado un jugador, una noticia, un partido o es seguido por algún usuario");
+                    e.setMensajeErrorUsuario("No se puede eliminar este equipo ya que tiene asociado un jugador, una noticia, un partido o es seguido por algún usuario");
                     break;
                 default:
                     e.setMensajeErrorUsuario("Error general del sistema. Consulte con el administrador");
@@ -145,6 +147,17 @@ public class CADNorthFutbol {
         return registrosAfectados;
     }
     
+    /**
+     * Este método modifica un registro de la tabla Equipo según un
+     * identificador específico con datos de un objeto Equipo
+     * @return Cantidad de registros eliminados
+     * @param idEquipo Identificador del equipo a modificar
+     * @param equipo Objeto con la información a modificar
+     * @throws ExcepcionNF
+     * @author Adam Janah
+     * @version 1.0
+     * @since 22/01/2025 DD/MM/AAAA
+     */
     public Integer modificarEquipo(Integer idEquipo, Equipo equipo) throws ExcepcionNF{
         int registrosAfectados = 0;
         String sql = "call modificar_equipo(?, ?, ?, ?, ?)";
@@ -194,9 +207,12 @@ public class CADNorthFutbol {
     
     /**
      * Este metodo inserta un registro en la tabla Equipo de la base de datos
-     * @param equipo
-     * @return
+     * @param equipo Objeto que contiene toda la información a insertar
+     * @return Cantidad de registros insertados
      * @throws ExcepcionNF 
+     * @author Adam Janah
+     * @version 1.0
+     * @since 23/01/2026 DD/MM/AAAA
      */
     public Integer insertarEquipo(Equipo equipo) throws ExcepcionNF{
         int registrosAfectados = 0;

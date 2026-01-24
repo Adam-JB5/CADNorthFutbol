@@ -17,6 +17,7 @@ import pojosnorthfutbol.ExcepcionNF;
 public class main {
     public static void main(String[] args) {
 
+        //====leerEquipos()=======
 //        try {
 //            CADNorthFutbol cad = new CADNorthFutbol();
 //            ArrayList<Equipo> equipos = cad.leerEquipos();
@@ -26,27 +27,37 @@ public class main {
 //            System.out.println(e);
 //        }
 
-        try {
-            CADNorthFutbol cad = new CADNorthFutbol();
-            Equipo equipo = new Equipo();
-            equipo.setNombre("kk");
-            equipo.setCiudad("kk");
-            equipo.setEntrenador("kk");
-            equipo.setGrupo("2");
-            Integer registros = cad.modificarEquipo(1, equipo);
-            System.out.println(registros);
-        } catch (ExcepcionNF e) {
-            System.out.println(e);
-        }
+        //====eliminarEquipo()=======
+//        try {
+//            CADNorthFutbol cad = new CADNorthFutbol();
+//            Integer registrosAfectados = cad.eliminarEquipo(5);
+//            System.out.println(registrosAfectados);
+//        } catch (ExcepcionNF e) {
+//            System.out.println(e);
+//        }
+        //====modificarEquipo()=======
+//        try {
+//            CADNorthFutbol cad = new CADNorthFutbol();
+//            Equipo equipo = new Equipo();
+//            equipo.setNombre("kk");
+//            equipo.setCiudad("kk");
+//            equipo.setEntrenador("kk");
+//            equipo.setGrupo("6");
+//            Integer registros = cad.modificarEquipo(1, equipo);
+//            System.out.println(registros);
+//        } catch (ExcepcionNF e) {
+//            System.out.println(e);
+//        }
         
+        //====insertarEquipo()=======
 //        try {
 //            CADNorthFutbol cad = new CADNorthFutbol();
 //            Equipo equipo = new Equipo();
 //            
-//            equipo.setNombre("kkIns");
+//            equipo.setNombre("kkIns23");
 //            equipo.setCiudad("kk");
 //            equipo.setEntrenador("kk");
-//            equipo.setGrupo("2");
+//            equipo.setGrupo("6");
 //            Integer registros = cad.insertarEquipo(equipo);
 //            System.out.println(registros);
 //        } catch (ExcepcionNF e) {
