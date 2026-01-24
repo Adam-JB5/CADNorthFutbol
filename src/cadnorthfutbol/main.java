@@ -16,14 +16,41 @@ import pojosnorthfutbol.ExcepcionNF;
  */
 public class main {
     public static void main(String[] args) {
-        
+
+//        try {
+//            CADNorthFutbol cad = new CADNorthFutbol();
+//            ArrayList<Equipo> equipos = cad.leerEquipos();
+//            System.out.println(equipos);
+//            
+//        } catch (ExcepcionNF e) {
+//            System.out.println(e);
+//        }
+
         try {
             CADNorthFutbol cad = new CADNorthFutbol();
-            ArrayList<Equipo> equipos = cad.leerEquipos();
-            System.out.println(equipos);
-            
+            Equipo equipo = new Equipo();
+            equipo.setNombre("kk");
+            equipo.setCiudad("kk");
+            equipo.setEntrenador("kk");
+            equipo.setGrupo("2");
+            Integer registros = cad.modificarEquipo(1, equipo);
+            System.out.println(registros);
         } catch (ExcepcionNF e) {
             System.out.println(e);
         }
+        
+//        try {
+//            CADNorthFutbol cad = new CADNorthFutbol();
+//            Equipo equipo = new Equipo();
+//            
+//            equipo.setNombre("kkIns");
+//            equipo.setCiudad("kk");
+//            equipo.setEntrenador("kk");
+//            equipo.setGrupo("2");
+//            Integer registros = cad.insertarEquipo(equipo);
+//            System.out.println(registros);
+//        } catch (ExcepcionNF e) {
+//            System.out.println(e);
+//        }
     }
 }
