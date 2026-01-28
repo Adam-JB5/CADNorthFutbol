@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import pojosnorthfutbol.Equipo;
 import pojosnorthfutbol.ExcepcionNF;
+import pojosnorthfutbol.Usuario;
 
 /**
  *
@@ -24,7 +25,8 @@ public class CADNorthFutbol {
     
     private Connection conexion;
 
-    private String HOST = "jdbc:oracle:thin:@192.168.1.209:1521:test";
+    private String HOST = "jdbc:oracle:thin:@172.16.212.1:1521:test";
+    //private String HOST = "jdbc:oracle:thin:@192.168.1.209:1521:test";
     //private String HOST = "jdbc:oracle:thin:@172.16.209.1:1521:test";
     private String USERBD = "NF";
     private String PASSWORD = "kk";
@@ -257,5 +259,174 @@ public class CADNorthFutbol {
         }
         
         return registrosAfectados;
+    }
+    
+    public Integer insertarUsuario(Usuario usuario) throws ExcepcionNF {
+    int registrosAfectados = 0;
+
+    String dml = "INSERT INTO usuario (id_usuario, nombre, email, rol, contrasenna, foto_perfil) VALUES (SEQ_USUARIO.nextval, ?, ?, ?, ?, ?)";
+
+    try {
+        conectarBD();
+        PreparedStatement ps = conexion.prepareStatement(dml);
+
+        ps.setString(1, usuario.getNombre());
+        ps.setString(2, usuario.getEmail());
+        ps.setString(3, usuario.getRol());
+        ps.setString(4, usuario.getContrasenna());
+        ps.setString(5, usuario.getFotoPerfil());
+
+        registrosAfectados = ps.executeUpdate();
+
+        ps.close();
+        conexion.close();
+
+    } catch (SQLException ex) {
+        ExcepcionNF e = new ExcepcionNF();
+
+        switch (ex.getErrorCode()) {
+            case 1:
+                e.setMensajeErrorUsuario("Ya existe un usuario con ese nombre o email");
+                break;
+            case 1400:
+                e.setMensajeErrorUsuario("Todos los campos obligatorios deben estar rellenos");
+                break;
+            case 2290:
+                e.setMensajeErrorUsuario("El email o el rol no tienen un formato válido");
+                break;
+            default:
+                e.setMensajeErrorUsuario("Error general del sistema. Consulte con el administrador");
+        }
+
+        e.setCodigoErrorBD(ex.getErrorCode());
+        e.setMensajeErrorBD(ex.getMessage());
+        e.setSentenciaSQL(dml);
+
+        throw e;
+    }
+    return registrosAfectados;
+}
+
+    public Integer modificarUsuario(Integer idUsuario, Usuario usuario) throws ExcepcionNF {
+    int registrosAfectados = 0;
+    String sql = "call modificar_usuario(?, ?, ?, ?, ?, ?)";
+
+    try {
+        conectarBD();
+
+        CallableStatement cs = conexion.prepareCall(sql);
+
+        cs.setString(1, usuario.getNombre());
+        cs.setString(2, usuario.getEmail());
+        cs.setString(3, usuario.getRol());
+        cs.setString(4, usuario.getContrasenna());
+        cs.setString(5, usuario.getFotoPerfil());
+        cs.setObject(6, idUsuario, java.sql.Types.INTEGER);
+
+        registrosAfectados = cs.executeUpdate();
+
+        cs.close();
+        conexion.close();
+
+    } catch (SQLException ex) {
+        ExcepcionNF e = new ExcepcionNF();
+
+        switch (ex.getErrorCode()) {
+            case 1:
+                e.setMensajeErrorUsuario("Ya existe un usuario con ese nombre o email");
+                break;
+            case 1407:
+                e.setMensajeErrorUsuario("Todos los campos obligatorios deben estar rellenos");
+                break;
+            case 2290:
+                e.setMensajeErrorUsuario("El email o el rol no tienen un formato válido");
+                break;
+            default:
+                e.setMensajeErrorUsuario("Error general del sistema. Consulte con el administrador");
+        }
+
+        e.setCodigoErrorBD(ex.getErrorCode());
+        e.setMensajeErrorBD(ex.getMessage());
+        e.setSentenciaSQL(sql);
+
+        throw e;
+    }
+
+    return registrosAfectados;
+}
+    
+    public Integer eliminarUsuario(Integer idUsuario) throws ExcepcionNF {
+        int registrosAfectados = 0;
+        String dml = "";
+
+        try {
+            conectarBD();
+            Statement sentencia = conexion.createStatement();
+
+            dml = "DELETE FROM usuario WHERE id_usuario = " + idUsuario;
+            registrosAfectados = sentencia.executeUpdate(dml);
+
+            sentencia.close();
+            conexion.close();
+
+        } catch (SQLException ex) {
+            ExcepcionNF e = new ExcepcionNF();
+
+            switch (ex.getErrorCode()) {
+                case 2292:
+                    e.setMensajeErrorUsuario("No se puede eliminar el usuario porque tiene datos asociados");
+                    break;
+                default:
+                    e.setMensajeErrorUsuario("Error general del sistema. Consulte con el administrador");
+            }
+
+            e.setCodigoErrorBD(ex.getErrorCode());
+            e.setMensajeErrorBD(ex.getMessage());
+            e.setSentenciaSQL(dml);
+
+            throw e;
+        }
+
+        return registrosAfectados;
+    }
+    
+    public ArrayList<Usuario> leerUsuarios() throws ExcepcionNF {
+        ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+        Usuario u;
+        String dql = "SELECT * FROM usuario";
+
+        try {
+            conectarBD();
+            Statement sentencia = conexion.createStatement();
+
+            ResultSet resultado = sentencia.executeQuery(dql);
+            while (resultado.next()) {
+                u = new Usuario();
+                u.setIdUsuario(resultado.getInt("ID_USUARIO"));
+                u.setNombre(resultado.getString("NOMBRE"));
+                u.setEmail(resultado.getString("EMAIL"));
+                u.setRol(resultado.getString("ROL"));
+                u.setContrasenna(resultado.getString("CONTRASENNA"));
+                u.setFotoPerfil(resultado.getString("FOTO_PERFIL"));
+
+                listaUsuarios.add(u);
+            }
+
+            resultado.close();
+            sentencia.close();
+            conexion.close();
+
+        } catch (SQLException ex) {
+            ExcepcionNF e = new ExcepcionNF();
+
+            e.setMensajeErrorUsuario("Error general del sistema. Consulte con el administrador");
+            e.setCodigoErrorBD(ex.getErrorCode());
+            e.setMensajeErrorBD(ex.getMessage());
+            e.setSentenciaSQL(dql);
+
+            throw e;
+        }
+
+        return listaUsuarios;
     }
 }
