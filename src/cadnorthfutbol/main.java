@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import pojosnorthfutbol.Comentario;
 import pojosnorthfutbol.Equipo;
 import pojosnorthfutbol.ExcepcionNF;
+import pojosnorthfutbol.Jugador;
 import pojosnorthfutbol.Usuario;
 
 /**
@@ -123,7 +124,7 @@ public class main {
         //==== eliminarJugador() =======
 //         try {
 //             CADNorthFutbol cad = new CADNorthFutbol();
-//            Integer registrosAfectados = cad.eliminarJugador(5);
+//            Integer registrosAfectados = cad.eliminarJugador(1);
 //            System.out.println(registrosAfectados);
 // 
 //       } catch (ExcepcionNF e) {
@@ -142,10 +143,12 @@ public class main {
 // 
 //             jugador.setNombre("Juan");
 //             jugador.setApellido("Pérez");
-//             jugador.setPosicion("D");
+//             jugador.setPosicion("F");
 //             jugador.setFechaNacimiento(new java.util.Date());
 //             jugador.setPaisOrigen("España");
+//             jugador.setDorsal(10);
 //  
+//             Integer registros = cad.modificarJugador(1, jugador);
 //             System.out.println(registros);
 // 
 //        } catch (ExcepcionNF e) {
@@ -164,7 +167,7 @@ public class main {
 // 
 //             jugador.setNombre("Luis");
 //             jugador.setApellido("Gómez");
-//             jugador.setPosicion("M");
+//             jugador.setPosicion("D");
 //             jugador.setFechaNacimiento(new java.util.Date());
 //             jugador.setPaisOrigen("Argentina");
 //             jugador.setDorsal(8);

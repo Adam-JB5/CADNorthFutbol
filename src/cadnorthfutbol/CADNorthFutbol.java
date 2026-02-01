@@ -27,8 +27,8 @@ public class CADNorthFutbol {
     
     private Connection conexion;
 
-    private String HOST = "jdbc:oracle:thin:@172.16.212.1:1521:test";
-    //private String HOST = "jdbc:oracle:thin:@192.168.1.209:1521:test";
+    //private String HOST = "jdbc:oracle:thin:@172.16.212.1:1521:test";
+    private String HOST = "jdbc:oracle:thin:@192.168.1.209:1521:test";
     //private String HOST = "jdbc:oracle:thin:@172.16.209.1:1521:test";
     private String USERBD = "NF";
     private String PASSWORD = "kk";
