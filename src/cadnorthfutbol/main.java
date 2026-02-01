@@ -109,5 +109,71 @@ public class main {
 //        } catch (ExcepcionNF e) {
 //            System.out.println(e);
 //        }
+
+        //==== leerJugadores() =======
+//        try {
+//             CADNorthFutbol cad = new CADNorthFutbol();
+//            ArrayList<Jugador> jugadores = cad.leerJugadores();
+//             System.out.println(jugadores);
+// 
+//         } catch (ExcepcionNF e) {
+//             System.out.println(e);
+//         }
+          
+        //==== eliminarJugador() =======
+//         try {
+//             CADNorthFutbol cad = new CADNorthFutbol();
+//            Integer registrosAfectados = cad.eliminarJugador(5);
+//            System.out.println(registrosAfectados);
+// 
+//       } catch (ExcepcionNF e) {
+//            System.out.println(e);
+//       }
+          
+        //==== modificarJugador() =======
+//         try {
+//             CADNorthFutbol cad = new CADNorthFutbol();
+// 
+//             Jugador jugador = new Jugador();
+//             Equipo equipo = new Equipo();
+// 
+//             equipo.setIdEquipo(1); // ID de equipo existente
+//             jugador.setEquipo(equipo);
+// 
+//             jugador.setNombre("Juan");
+//             jugador.setApellido("Pérez");
+//             jugador.setPosicion("D");
+//             jugador.setFechaNacimiento(new java.util.Date());
+//             jugador.setPaisOrigen("España");
+//  
+//             System.out.println(registros);
+// 
+//        } catch (ExcepcionNF e) {
+//              System.out.println(e);
+//        }
+        
+      //==== insertarJugador() =======
+//        try {
+//             CADNorthFutbol cad = new CADNorthFutbol();
+// 
+//             Jugador jugador = new Jugador();
+//             Equipo equipo = new Equipo();
+// 
+//             equipo.setIdEquipo(1); // ID de equipo existente
+//             jugador.setEquipo(equipo);
+// 
+//             jugador.setNombre("Luis");
+//             jugador.setApellido("Gómez");
+//             jugador.setPosicion("M");
+//             jugador.setFechaNacimiento(new java.util.Date());
+//             jugador.setPaisOrigen("Argentina");
+//             jugador.setDorsal(8);
+// 
+//             Integer registros = cad.insertarJugador(jugador);
+//             System.out.println(registros);
+// 
+//         } catch (ExcepcionNF e) {
+//             System.out.println(e);
+//         }
     }
 }
